@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SatıslarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Araclars">
+    <Key>
+      <PropertyRef Name="AracNo" />
+    </Key>
+    <Property Name="AracNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AracTur" Type="varchar" MaxLength="50" />
+    <Property Name="AracKapasite" Type="int" />
+    <Property Name="AracSofor" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Musterilers">
+    <Key>
+      <PropertyRef Name="MusteriNo" />
+    </Key>
+    <Property Name="MusteriNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SevkiyatId" Type="varchar" MaxLength="50" />
+    <Property Name="MusteriAdSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="Adres" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" />
+    <Property Name="OdemeDurumu" Type="varchar" MaxLength="50" />
+    <Property Name="PersonelNo" Type="int" />
+  </EntityType>
+  <EntityType Name="Personellers">
+    <Key>
+      <PropertyRef Name="PersonelNo" />
+    </Key>
+    <Property Name="PersonelNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonelAdSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="Adres" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sevkiyatlars">
+    <Key>
+      <PropertyRef Name="SevkiyatNo" />
+    </Key>
+    <Property Name="SevkiyatNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SevkiyatAdi" Type="varchar" MaxLength="50" />
+    <Property Name="SevkiyatAlimNoktasi" Type="varchar" MaxLength="50" />
+    <Property Name="SevkiyatUlasimNoktasi" Type="varchar" MaxLength="50" />
+    <Property Name="Mesafe" Type="varchar" MaxLength="50" />
+    <Property Name="MesafeTutar" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="AracNo" Type="int" />
+    <Property Name="MusteriNo" Type="int" />
+  </EntityType>
+  <Association Name="FK_Musteriler_Personeller">
+    <End Role="Personellers" Type="Self.Personellers" Multiplicity="0..1" />
+    <End Role="Musterilers" Type="Self.Musterilers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personellers">
+        <PropertyRef Name="PersonelNo" />
+      </Principal>
+      <Dependent Role="Musterilers">
+        <PropertyRef Name="PersonelNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sevkiyatlar_Araclar">
+    <End Role="Araclars" Type="Self.Araclars" Multiplicity="0..1" />
+    <End Role="Sevkiyatlars" Type="Self.Sevkiyatlars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Araclars">
+        <PropertyRef Name="AracNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlars">
+        <PropertyRef Name="AracNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sevkiyatlar_Musteriler">
+    <End Role="Musterilers" Type="Self.Musterilers" Multiplicity="0..1" />
+    <End Role="Sevkiyatlars" Type="Self.Sevkiyatlars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musterilers">
+        <PropertyRef Name="MusteriNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlars">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SEkle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatAdi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatAlimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatUlasimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="Mesafe" Type="varchar" Mode="In" />
+    <Parameter Name="MesafeTutar" Type="money" Mode="In" />
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SListele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SSil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SYenile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatNo" Type="int" Mode="In" />
+    <Parameter Name="SevkiyatAdi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatAlimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatUlasimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="Mesafe" Type="varchar" Mode="In" />
+    <Parameter Name="MesafeTutar" Type="money" Mode="In" />
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="SatıslarModelStoreContainer">
+    <EntitySet Name="Araclars" EntityType="Self.Araclars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musterilers" EntityType="Self.Musterilers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personellers" EntityType="Self.Personellers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sevkiyatlars" EntityType="Self.Sevkiyatlars" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Musteriler_Personeller" Association="Self.FK_Musteriler_Personeller">
+      <End Role="Personellers" EntitySet="Personellers" />
+      <End Role="Musterilers" EntitySet="Musterilers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sevkiyatlar_Araclar" Association="Self.FK_Sevkiyatlar_Araclar">
+      <End Role="Araclars" EntitySet="Araclars" />
+      <End Role="Sevkiyatlars" EntitySet="Sevkiyatlars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sevkiyatlar_Musteriler" Association="Self.FK_Sevkiyatlar_Musteriler">
+      <End Role="Musterilers" EntitySet="Musterilers" />
+      <End Role="Sevkiyatlars" EntitySet="Sevkiyatlars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

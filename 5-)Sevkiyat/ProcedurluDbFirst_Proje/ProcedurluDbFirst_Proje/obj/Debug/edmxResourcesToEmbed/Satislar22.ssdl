@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SatıslarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Araclar">
+    <Key>
+      <PropertyRef Name="AracNo" />
+    </Key>
+    <Property Name="AracNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AracTur" Type="varchar" MaxLength="50" />
+    <Property Name="AracKapasite" Type="int" />
+    <Property Name="AracSofor" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Musteriler">
+    <Key>
+      <PropertyRef Name="MusteriNo" />
+    </Key>
+    <Property Name="MusteriNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SevkiyatId" Type="varchar" MaxLength="50" />
+    <Property Name="MusteriAdSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="Adres" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" />
+    <Property Name="OdemeDurumu" Type="varchar" MaxLength="50" />
+    <Property Name="PersonelNo" Type="int" />
+  </EntityType>
+  <EntityType Name="Personeller">
+    <Key>
+      <PropertyRef Name="PersonelNo" />
+    </Key>
+    <Property Name="PersonelNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonelAdSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="Adres" Type="varchar" MaxLength="50" />
+    <Property Name="Telefon" Type="varchar" MaxLength="50" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sevkiyatlar">
+    <Key>
+      <PropertyRef Name="SevkiyatNo" />
+    </Key>
+    <Property Name="SevkiyatNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SevkiyatAdi" Type="varchar" MaxLength="50" />
+    <Property Name="SevkiyatAlimNoktasi" Type="varchar" MaxLength="50" />
+    <Property Name="SevkiyatUlasimNoktasi" Type="varchar" MaxLength="50" />
+    <Property Name="Mesafe" Type="varchar" MaxLength="50" />
+    <Property Name="MesafeTutar" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="AracNo" Type="int" />
+    <Property Name="MusteriNo" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Musteriler_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Musteriler" Type="Self.Musteriler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonelNo" />
+      </Principal>
+      <Dependent Role="Musteriler">
+        <PropertyRef Name="PersonelNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sevkiyatlar_Araclar">
+    <End Role="Araclar" Type="Self.Araclar" Multiplicity="0..1" />
+    <End Role="Sevkiyatlar" Type="Self.Sevkiyatlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Araclar">
+        <PropertyRef Name="AracNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlar">
+        <PropertyRef Name="AracNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sevkiyatlar_Musteriler">
+    <End Role="Musteriler" Type="Self.Musteriler" Multiplicity="0..1" />
+    <End Role="Sevkiyatlar" Type="Self.Sevkiyatlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteriler">
+        <PropertyRef Name="MusteriNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlar">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AEkle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Aractur" Type="varchar" Mode="In" />
+    <Parameter Name="AracKapasite" Type="int" Mode="In" />
+    <Parameter Name="AracSofor" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AListele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ASil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AYenile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+    <Parameter Name="Aractur" Type="varchar" Mode="In" />
+    <Parameter Name="AracKapasite" Type="int" Mode="In" />
+    <Parameter Name="AracSofor" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="MEkle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatId" Type="varchar" Mode="In" />
+    <Parameter Name="MusteriAdSoyad" Type="varchar" Mode="In" />
+    <Parameter Name="Adres" Type="varchar" Mode="In" />
+    <Parameter Name="Telefon" Type="varchar" Mode="In" />
+    <Parameter Name="Mail" Type="varchar" Mode="In" />
+    <Parameter Name="OdemeDurumu" Type="varchar" Mode="In" />
+    <Parameter Name="PersonelNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MListele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="MSil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MYenile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+    <Parameter Name="SevkiyatId" Type="varchar" Mode="In" />
+    <Parameter Name="MusteriAdSoyad" Type="varchar" Mode="In" />
+    <Parameter Name="Adres" Type="varchar" Mode="In" />
+    <Parameter Name="Telefon" Type="varchar" Mode="In" />
+    <Parameter Name="Mail" Type="varchar" Mode="In" />
+    <Parameter Name="OdemeDurumu" Type="varchar" Mode="In" />
+    <Parameter Name="PersonelNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PEkle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonelAdSoyad" Type="varchar" Mode="In" />
+    <Parameter Name="Adres" Type="varchar" Mode="In" />
+    <Parameter Name="Telefon" Type="varchar" Mode="In" />
+    <Parameter Name="Mail" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="PListele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PSil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonelNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PYenile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonelNo" Type="int" Mode="In" />
+    <Parameter Name="PersonelAdSoyad" Type="varchar" Mode="In" />
+    <Parameter Name="Adres" Type="varchar" Mode="In" />
+    <Parameter Name="Telefon" Type="varchar" Mode="In" />
+    <Parameter Name="Mail" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SEkle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatAdi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatAlimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatUlasimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="Mesafe" Type="varchar" Mode="In" />
+    <Parameter Name="MesafeTutar" Type="money" Mode="In" />
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SListele" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SSil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SYenile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SevkiyatNo" Type="int" Mode="In" />
+    <Parameter Name="SevkiyatAdi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatAlimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="SevkiyatUlasimNoktasi" Type="varchar" Mode="In" />
+    <Parameter Name="Mesafe" Type="varchar" Mode="In" />
+    <Parameter Name="MesafeTutar" Type="money" Mode="In" />
+    <Parameter Name="AracNo" Type="int" Mode="In" />
+    <Parameter Name="MusteriNo" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="SatıslarModelStoreContainer">
+    <EntitySet Name="Araclar" EntityType="Self.Araclar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musteriler" EntityType="Self.Musteriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personeller" EntityType="Self.Personeller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sevkiyatlar" EntityType="Self.Sevkiyatlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Musteriler_Personeller" Association="Self.FK_Musteriler_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Musteriler" EntitySet="Musteriler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sevkiyatlar_Araclar" Association="Self.FK_Sevkiyatlar_Araclar">
+      <End Role="Araclar" EntitySet="Araclar" />
+      <End Role="Sevkiyatlar" EntitySet="Sevkiyatlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sevkiyatlar_Musteriler" Association="Self.FK_Sevkiyatlar_Musteriler">
+      <End Role="Musteriler" EntitySet="Musteriler" />
+      <End Role="Sevkiyatlar" EntitySet="Sevkiyatlar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

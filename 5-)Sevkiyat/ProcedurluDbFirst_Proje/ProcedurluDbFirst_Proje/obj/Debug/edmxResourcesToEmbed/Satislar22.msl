@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SatıslarModelStoreContainer" CdmEntityContainer="SatıslarEntities3">
+    <EntitySetMapping Name="Araclars">
+      <EntityTypeMapping TypeName="SatıslarModel.Araclar">
+        <MappingFragment StoreEntitySet="Araclar">
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="AracTur" ColumnName="AracTur" />
+          <ScalarProperty Name="AracKapasite" ColumnName="AracKapasite" />
+          <ScalarProperty Name="AracSofor" ColumnName="AracSofor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musterilers">
+      <EntityTypeMapping TypeName="SatıslarModel.Musteriler">
+        <MappingFragment StoreEntitySet="Musteriler">
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+          <ScalarProperty Name="SevkiyatId" ColumnName="SevkiyatId" />
+          <ScalarProperty Name="MusteriAdSoyad" ColumnName="MusteriAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="OdemeDurumu" ColumnName="OdemeDurumu" />
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personellers">
+      <EntityTypeMapping TypeName="SatıslarModel.Personeller">
+        <MappingFragment StoreEntitySet="Personeller">
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+          <ScalarProperty Name="PersonelAdSoyad" ColumnName="PersonelAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sevkiyatlars">
+      <EntityTypeMapping TypeName="SatıslarModel.Sevkiyatlar">
+        <MappingFragment StoreEntitySet="Sevkiyatlar">
+          <ScalarProperty Name="SevkiyatNo" ColumnName="SevkiyatNo" />
+          <ScalarProperty Name="SevkiyatAdi" ColumnName="SevkiyatAdi" />
+          <ScalarProperty Name="SevkiyatAlimNoktasi" ColumnName="SevkiyatAlimNoktasi" />
+          <ScalarProperty Name="SevkiyatUlasimNoktasi" ColumnName="SevkiyatUlasimNoktasi" />
+          <ScalarProperty Name="Mesafe" ColumnName="Mesafe" />
+          <ScalarProperty Name="MesafeTutar" ColumnName="MesafeTutar" />
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SatıslarModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AEkle" FunctionName="SatıslarModel.Store.AEkle" />
+    <FunctionImportMapping FunctionImportName="AListele" FunctionName="SatıslarModel.Store.AListele">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.AListele_Result">
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="AracTur" ColumnName="AracTur" />
+          <ScalarProperty Name="AracKapasite" ColumnName="AracKapasite" />
+          <ScalarProperty Name="AracSofor" ColumnName="AracSofor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ASil" FunctionName="SatıslarModel.Store.ASil" />
+    <FunctionImportMapping FunctionImportName="AYenile" FunctionName="SatıslarModel.Store.AYenile" />
+    <FunctionImportMapping FunctionImportName="MEkle" FunctionName="SatıslarModel.Store.MEkle" />
+    <FunctionImportMapping FunctionImportName="MListele" FunctionName="SatıslarModel.Store.MListele">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.MListele_Result">
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+          <ScalarProperty Name="SevkiyatId" ColumnName="SevkiyatId" />
+          <ScalarProperty Name="MusteriAdSoyad" ColumnName="MusteriAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="OdemeDurumu" ColumnName="OdemeDurumu" />
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MSil" FunctionName="SatıslarModel.Store.MSil" />
+    <FunctionImportMapping FunctionImportName="MYenile" FunctionName="SatıslarModel.Store.MYenile" />
+    <FunctionImportMapping FunctionImportName="PEkle" FunctionName="SatıslarModel.Store.PEkle" />
+    <FunctionImportMapping FunctionImportName="PListele" FunctionName="SatıslarModel.Store.PListele">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.PListele_Result">
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+          <ScalarProperty Name="PersonelAdSoyad" ColumnName="PersonelAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PSil" FunctionName="SatıslarModel.Store.PSil" />
+    <FunctionImportMapping FunctionImportName="PYenile" FunctionName="SatıslarModel.Store.PYenile" />
+    <FunctionImportMapping FunctionImportName="SEkle" FunctionName="SatıslarModel.Store.SEkle" />
+    <FunctionImportMapping FunctionImportName="SListele" FunctionName="SatıslarModel.Store.SListele">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.SListele_Result">
+          <ScalarProperty Name="SevkiyatNo" ColumnName="SevkiyatNo" />
+          <ScalarProperty Name="SevkiyatAdi" ColumnName="SevkiyatAdi" />
+          <ScalarProperty Name="SevkiyatAlimNoktasi" ColumnName="SevkiyatAlimNoktasi" />
+          <ScalarProperty Name="SevkiyatUlasimNoktasi" ColumnName="SevkiyatUlasimNoktasi" />
+          <ScalarProperty Name="Mesafe" ColumnName="Mesafe" />
+          <ScalarProperty Name="MesafeTutar" ColumnName="MesafeTutar" />
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SatıslarModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SatıslarModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SatıslarModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SatıslarModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SatıslarModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SatıslarModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SatıslarModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SatıslarModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="SSil" FunctionName="SatıslarModel.Store.SSil" />
+    <FunctionImportMapping FunctionImportName="SYenile" FunctionName="SatıslarModel.Store.SYenile" />
+  </EntityContainerMapping>
+</Mapping>

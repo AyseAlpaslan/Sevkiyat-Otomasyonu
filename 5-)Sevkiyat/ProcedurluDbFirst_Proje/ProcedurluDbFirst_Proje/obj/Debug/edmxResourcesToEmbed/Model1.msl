@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SatıslarModelStoreContainer" CdmEntityContainer="SatıslarEntities">
+    <EntitySetMapping Name="Araclars">
+      <EntityTypeMapping TypeName="IsTypeOf(SatıslarModel.Araclar)">
+        <MappingFragment StoreEntitySet="Araclars">
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="AracTur" ColumnName="AracTur" />
+          <ScalarProperty Name="AracKapasite" ColumnName="AracKapasite" />
+          <ScalarProperty Name="AracSofor" ColumnName="AracSofor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musterilers">
+      <EntityTypeMapping TypeName="IsTypeOf(SatıslarModel.Musteriler)">
+        <MappingFragment StoreEntitySet="Musterilers">
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+          <ScalarProperty Name="SevkiyatId" ColumnName="SevkiyatId" />
+          <ScalarProperty Name="MusteriAdSoyad" ColumnName="MusteriAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="OdemeDurumu" ColumnName="OdemeDurumu" />
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personellers">
+      <EntityTypeMapping TypeName="IsTypeOf(SatıslarModel.Personeller)">
+        <MappingFragment StoreEntitySet="Personellers">
+          <ScalarProperty Name="PersonelNo" ColumnName="PersonelNo" />
+          <ScalarProperty Name="PersonelAdSoyad" ColumnName="PersonelAdSoyad" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sevkiyatlars">
+      <EntityTypeMapping TypeName="IsTypeOf(SatıslarModel.Sevkiyatlar)">
+        <MappingFragment StoreEntitySet="Sevkiyatlars">
+          <ScalarProperty Name="SevkiyatNo" ColumnName="SevkiyatNo" />
+          <ScalarProperty Name="SevkiyatAdi" ColumnName="SevkiyatAdi" />
+          <ScalarProperty Name="SevkiyatAlimNoktasi" ColumnName="SevkiyatAlimNoktasi" />
+          <ScalarProperty Name="SevkiyatUlasimNoktasi" ColumnName="SevkiyatUlasimNoktasi" />
+          <ScalarProperty Name="Mesafe" ColumnName="Mesafe" />
+          <ScalarProperty Name="MesafeTutar" ColumnName="MesafeTutar" />
+          <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+          <ScalarProperty Name="MusteriNo" ColumnName="MusteriNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SEkle1" FunctionName="SatıslarModel.Store.SEkle" />
+    <FunctionImportMapping FunctionImportName="SListele1" FunctionName="SatıslarModel.Store.SListele" />
+    <FunctionImportMapping FunctionImportName="SSil1" FunctionName="SatıslarModel.Store.SSil" />
+    <FunctionImportMapping FunctionImportName="SYenile1" FunctionName="SatıslarModel.Store.SYenile" />
+  </EntityContainerMapping>
+</Mapping>

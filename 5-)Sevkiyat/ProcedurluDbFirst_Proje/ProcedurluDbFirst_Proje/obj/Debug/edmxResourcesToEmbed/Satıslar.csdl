@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SatıslarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Araclar">
+    <Key>
+      <PropertyRef Name="AracNo" />
+    </Key>
+    <Property Name="AracNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AracTur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AracKapasite" Type="Int32" />
+    <Property Name="AracSofor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sevkiyatlars" Relationship="Self.FK_Sevkiyatlar_Araclar" FromRole="Araclars" ToRole="Sevkiyatlars" />
+  </EntityType>
+  <EntityType Name="Musteriler">
+    <Key>
+      <PropertyRef Name="MusteriNo" />
+    </Key>
+    <Property Name="MusteriNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SevkiyatId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MusteriAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OdemeDurumu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonelNo" Type="Int32" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Musteriler_Personeller" FromRole="Musterilers" ToRole="Personellers" />
+    <NavigationProperty Name="Sevkiyatlars" Relationship="Self.FK_Sevkiyatlar_Musteriler" FromRole="Musterilers" ToRole="Sevkiyatlars" />
+  </EntityType>
+  <EntityType Name="Personeller">
+    <Key>
+      <PropertyRef Name="PersonelNo" />
+    </Key>
+    <Property Name="PersonelNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonelAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Musterilers" Relationship="Self.FK_Musteriler_Personeller" FromRole="Personellers" ToRole="Musterilers" />
+  </EntityType>
+  <EntityType Name="Sevkiyatlar">
+    <Key>
+      <PropertyRef Name="SevkiyatNo" />
+    </Key>
+    <Property Name="SevkiyatNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SevkiyatAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SevkiyatAlimNoktasi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SevkiyatUlasimNoktasi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mesafe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MesafeTutar" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AracNo" Type="Int32" />
+    <Property Name="MusteriNo" Type="Int32" />
+    <NavigationProperty Name="Araclar" Relationship="Self.FK_Sevkiyatlar_Araclar" FromRole="Sevkiyatlars" ToRole="Araclars" />
+    <NavigationProperty Name="Musteriler" Relationship="Self.FK_Sevkiyatlar_Musteriler" FromRole="Sevkiyatlars" ToRole="Musterilers" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Sevkiyatlar_Araclar">
+    <End Role="Araclars" Type="Self.Araclar" Multiplicity="0..1" />
+    <End Role="Sevkiyatlars" Type="Self.Sevkiyatlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Araclars">
+        <PropertyRef Name="AracNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlars">
+        <PropertyRef Name="AracNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Musteriler_Personeller">
+    <End Role="Personellers" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Musterilers" Type="Self.Musteriler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personellers">
+        <PropertyRef Name="PersonelNo" />
+      </Principal>
+      <Dependent Role="Musterilers">
+        <PropertyRef Name="PersonelNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sevkiyatlar_Musteriler">
+    <End Role="Musterilers" Type="Self.Musteriler" Multiplicity="0..1" />
+    <End Role="Sevkiyatlars" Type="Self.Sevkiyatlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musterilers">
+        <PropertyRef Name="MusteriNo" />
+      </Principal>
+      <Dependent Role="Sevkiyatlars">
+        <PropertyRef Name="MusteriNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SatıslarEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Araclars" EntityType="Self.Araclar" />
+    <EntitySet Name="Musterilers" EntityType="Self.Musteriler" />
+    <EntitySet Name="Personellers" EntityType="Self.Personeller" />
+    <EntitySet Name="Sevkiyatlars" EntityType="Self.Sevkiyatlar" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Sevkiyatlar_Araclar" Association="Self.FK_Sevkiyatlar_Araclar">
+      <End Role="Araclars" EntitySet="Araclars" />
+      <End Role="Sevkiyatlars" EntitySet="Sevkiyatlars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Musteriler_Personeller" Association="Self.FK_Musteriler_Personeller">
+      <End Role="Personellers" EntitySet="Personellers" />
+      <End Role="Musterilers" EntitySet="Musterilers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sevkiyatlar_Musteriler" Association="Self.FK_Sevkiyatlar_Musteriler">
+      <End Role="Musterilers" EntitySet="Musterilers" />
+      <End Role="Sevkiyatlars" EntitySet="Sevkiyatlars" />
+    </AssociationSet>
+    <FunctionImport Name="AEkle">
+      <Parameter Name="Aractur" Mode="In" Type="String" />
+      <Parameter Name="AracKapasite" Mode="In" Type="Int32" />
+      <Parameter Name="AracSofor" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AListele" />
+    <FunctionImport Name="ASil">
+      <Parameter Name="AracNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AYenile">
+      <Parameter Name="AracNo" Mode="In" Type="Int32" />
+      <Parameter Name="Aractur" Mode="In" Type="String" />
+      <Parameter Name="AracKapasite" Mode="In" Type="Int32" />
+      <Parameter Name="AracSofor" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="MEkle">
+      <Parameter Name="SevkiyatId" Mode="In" Type="String" />
+      <Parameter Name="MusteriAdSoyad" Mode="In" Type="String" />
+      <Parameter Name="Adres" Mode="In" Type="String" />
+      <Parameter Name="Telefon" Mode="In" Type="String" />
+      <Parameter Name="Mail" Mode="In" Type="String" />
+      <Parameter Name="OdemeDurumu" Mode="In" Type="String" />
+      <Parameter Name="PersonelNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MListele" />
+    <FunctionImport Name="MSil">
+      <Parameter Name="MusteriNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MYenile">
+      <Parameter Name="MusteriNo" Mode="In" Type="Int32" />
+      <Parameter Name="SevkiyatId" Mode="In" Type="String" />
+      <Parameter Name="MusteriAdSoyad" Mode="In" Type="String" />
+      <Parameter Name="Adres" Mode="In" Type="String" />
+      <Parameter Name="Telefon" Mode="In" Type="String" />
+      <Parameter Name="Mail" Mode="In" Type="String" />
+      <Parameter Name="OdemeDurumu" Mode="In" Type="String" />
+      <Parameter Name="PersonelNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PEkle">
+      <Parameter Name="PersonelAdSoyad" Mode="In" Type="String" />
+      <Parameter Name="Adres" Mode="In" Type="String" />
+      <Parameter Name="Telefon" Mode="In" Type="String" />
+      <Parameter Name="Mail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PListele" />
+    <FunctionImport Name="PSil">
+      <Parameter Name="PersonelNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PYenile">
+      <Parameter Name="PersonelNo" Mode="In" Type="Int32" />
+      <Parameter Name="PersonelAdSoyad" Mode="In" Type="String" />
+      <Parameter Name="Adres" Mode="In" Type="String" />
+      <Parameter Name="Telefon" Mode="In" Type="String" />
+      <Parameter Name="Mail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SEkle">
+      <Parameter Name="SevkiyatAdi" Mode="In" Type="String" />
+      <Parameter Name="SevkiyatAlimNoktasi" Mode="In" Type="String" />
+      <Parameter Name="SevkiyatUlasimNoktasi" Mode="In" Type="String" />
+      <Parameter Name="Mesafe" Mode="In" Type="String" />
+      <Parameter Name="MesafeTutar" Mode="In" Type="Decimal" />
+      <Parameter Name="AracNo" Mode="In" Type="Int32" />
+      <Parameter Name="MusteriNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SListele" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SatıslarModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SatıslarModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="SSil">
+      <Parameter Name="SevkiyatNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SYenile">
+      <Parameter Name="SevkiyatNo" Mode="In" Type="Int32" />
+      <Parameter Name="SevkiyatAdi" Mode="In" Type="String" />
+      <Parameter Name="SevkiyatAlimNoktasi" Mode="In" Type="String" />
+      <Parameter Name="SevkiyatUlasimNoktasi" Mode="In" Type="String" />
+      <Parameter Name="Mesafe" Mode="In" Type="String" />
+      <Parameter Name="MesafeTutar" Mode="In" Type="Decimal" />
+      <Parameter Name="AracNo" Mode="In" Type="Int32" />
+      <Parameter Name="MusteriNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
